@@ -2,4 +2,8 @@
 Another Pong Game made with Unity and &lt;3
 
 ## Version 1.0.0
-- Basic gameplay.
+- Basic gameplay. (1 vs 1 same computer)
+
+## Version 1.1.0
+- Basic gameplay. (1 vs 1 same computer)
+- Initial Android support. (1 vs 1 same mobile)
