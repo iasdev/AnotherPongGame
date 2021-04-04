@@ -10,6 +10,8 @@ TagManager:
   - LeftPad
   - RightPad
   - GoalBand
+  - LeftScore
+  - RightScore
   layers:
   - Default
   - TransparentFX
