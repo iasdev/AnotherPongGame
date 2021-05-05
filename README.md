@@ -11,3 +11,6 @@ Another Pong Game made with Unity and &lt;3
 ## Version 1.2.0
 - Basic sound usage (on player goal/win, on ball collision)
 - Score board
+
+## Version 1.3.0
+- Global refactor (Use of GameManager)

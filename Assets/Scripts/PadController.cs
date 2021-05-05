@@ -4,63 +4,72 @@ using UnityEngine;
 
 public class PadController : MonoBehaviour
 {
+    public GameManager gameManager;
+    
     public float speed;
     public float topDownLimit = 5.5f;
 
-    private int halfScreenPosX;
-    private Vector3 originalLeftPadPosition;
-    private Vector3 originalRightPadPosition;
+    private Camera _camera;
+    private int _halfScreenPosX;
+    private Vector3 _originalLeftPadPosition;
+    private Vector3 _originalRightPadPosition;
 
-    void Start() {
-        halfScreenPosX = (int)Screen.width / 2;
-        originalLeftPadPosition = GameObject.FindGameObjectWithTag("LeftPad").transform.position;
-        originalRightPadPosition = GameObject.FindGameObjectWithTag("RightPad").transform.position;
+    private void Start()
+    {
+        _camera = Camera.main;
+        _halfScreenPosX = Screen.width / 2;
+        _originalLeftPadPosition = GameObject.FindGameObjectWithTag("LeftPad").transform.position;
+        _originalRightPadPosition = GameObject.FindGameObjectWithTag("RightPad").transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-        HandleDesktopMovement();
-        HandleMobileMovement();
+        if (gameManager.IsGameStarted())
+        {
+            HandleDesktopMovement();
+            HandleMobileMovement();
 
-        if (transform.position.z > topDownLimit)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, topDownLimit);
-        }
-        else if (transform.position.z < -topDownLimit)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -topDownLimit);
+            var transformPosition = transform.position;
+            if (transformPosition.z > topDownLimit)
+            {
+                transform.position = new Vector3(transformPosition.x, transformPosition.y, topDownLimit);
+            }
+            else if (transformPosition.z < -topDownLimit)
+            {
+                transform.position = new Vector3(transformPosition.x, transformPosition.y, -topDownLimit);
+            }
         }
     }
 
     private void HandleDesktopMovement()
     {
         if ((CompareTag("LeftPad") && Input.GetKey(KeyCode.W)) || (CompareTag("RightPad") && Input.GetKey(KeyCode.UpArrow))) {
-            transform.Translate(Vector3.forward * 1 * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * (1 * speed * Time.deltaTime));
         } else if ((CompareTag("LeftPad") && Input.GetKey(KeyCode.S)) || (CompareTag("RightPad") && Input.GetKey(KeyCode.DownArrow))) {
-            transform.Translate(Vector3.back * 1 * speed * Time.deltaTime);
+            transform.Translate(Vector3.back * (1 * speed * Time.deltaTime));
         }
     }
 
     private void HandleMobileMovement()
     {
-        Touch[] touches = Input.touches;
+        var touches = Input.touches;
 
-        foreach (Touch touch in touches)
+        foreach (var touch in touches)
         {
-            bool isLeftScreenPart = touch.position.x < halfScreenPosX;
+            var isLeftScreenPart = touch.position.x < _halfScreenPosX;
             
             if (touch.phase == TouchPhase.Moved)
             {
-                Vector3 currentTap = new Vector3(touch.position.x, touch.position.y, 1);
-                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentTap);
+                var currentTap = new Vector3(touch.position.x, touch.position.y, 1);
+                var currentPosition = _camera.ScreenToWorldPoint(currentTap);
 
                 if (CompareTag("LeftPad") && isLeftScreenPart)
                 {
-                    transform.position = new Vector3(originalLeftPadPosition.x, originalLeftPadPosition.y, currentPosition.z);
+                    transform.position = new Vector3(_originalLeftPadPosition.x, _originalLeftPadPosition.y, currentPosition.z);
                 }
                 else if (CompareTag("RightPad") && !isLeftScreenPart)
                 {
-                    transform.position = new Vector3(originalRightPadPosition.x, originalLeftPadPosition.y, currentPosition.z);
+                    transform.position = new Vector3(_originalRightPadPosition.x, _originalLeftPadPosition.y, currentPosition.z);
                 }
             }
         }

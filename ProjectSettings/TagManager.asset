@@ -12,6 +12,7 @@ TagManager:
   - GoalBand
   - LeftScore
   - RightScore
+  - GameManager
   layers:
   - Default
   - TransparentFX
