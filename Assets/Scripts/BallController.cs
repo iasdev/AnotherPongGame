@@ -1,14 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BallController : MonoBehaviour
 {
     public GameManager gameManager;
     
-    public float speed;
+    public float startSpeed, speed;
     private Vector3 _zMovement = Vector3.forward;
     private Vector3 _xMovement = Vector3.right;
+
+    private void Start()
+    {
+        startSpeed = speed;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,6 +52,11 @@ public class BallController : MonoBehaviour
         {
             transform.Translate(_zMovement * (speed * Time.deltaTime));
             transform.Translate(_xMovement * (speed * Time.deltaTime));
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+            speed = startSpeed;
         }
     }
 }

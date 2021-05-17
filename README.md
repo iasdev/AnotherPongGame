@@ -14,3 +14,6 @@ Another Pong Game made with Unity and &lt;3
 
 ## Version 1.3.0
 - Global refactor (Use of GameManager)
+
+## Version 1.4.0
+- Basic menu
