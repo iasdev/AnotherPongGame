@@ -20,3 +20,4 @@ Another Pong Game made with Unity and &lt;3
 
 ## Version 1.5.0
 - Resized menu
+- In-Game pause button
