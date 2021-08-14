@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameManager gameManager;
     public GameObject panelGameModeButtons;
     public GameObject panelMainOptionsButtons;
+    public TextMeshProUGUI pauseGameButtonText;
     
     public void OnPlayClick()
     {
@@ -19,6 +21,12 @@ public class UIManager : MonoBehaviour
         panelGameModeButtons.SetActive(false);
         panelMainOptionsButtons.SetActive(true);
         gameManager.OnMenu();
+    }
+
+    public void OnPauseGameClick()
+    {
+        pauseGameButtonText.text = pauseGameButtonText.text == "Continuar partida" ? "Pausar partida" : "Continuar partida";
+        gameManager.OnPause();
     }
     
     public void OnExitClick()
