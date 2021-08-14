@@ -17,3 +17,6 @@ Another Pong Game made with Unity and &lt;3
 
 ## Version 1.4.0
 - Basic menu
+
+## Version 1.5.0
+- Resized menu
