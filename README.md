@@ -1,5 +1,9 @@
 # AnotherPongGame
-Another Pong Game made with Unity and &lt;3
+Made with Unity and &lt;3
+
+![Menu](https://github.com/iasdev/AnotherPongGame/blob/main/Showcase/menu.PNG?raw=true)
+
+![Game board](https://github.com/iasdev/AnotherPongGame/blob/main/Showcase/board.PNG?raw=true)
 
 ## Version 1.0.0
 - Basic gameplay. (1 vs 1 same computer)
